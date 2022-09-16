@@ -12,3 +12,4 @@ class Game
     super || @last_played_at < 2.years.ago
   end
 end
+

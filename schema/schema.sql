@@ -17,7 +17,6 @@ CREATE TABLE Game(
   last_played_at DATE NOT NULL,
   item_id INT NOT NULL,
   CONSTRAINT item_fk FOREIGN KEY (item_id) REFERENCES Items (id) 
-);
 
 CREATE TABLE music_album(
   ID SERIAL PRIMARY KEY,
@@ -27,6 +26,7 @@ CREATE TABLE music_album(
   label_ID INT REFERENCES label(ID),
   author_ID INT REFERENCES author(ID),
   genre_ID INT REFERENCES genre(ID)
+
 );
 
 CREATE TABLE genre(

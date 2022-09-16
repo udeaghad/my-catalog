@@ -1,16 +1,15 @@
 class Game
-  attr_accessor :title, :author
-  attr_reader :players
+  attr_accessor :multiplayer, :last_played_at
+  attr_reader :id, :archieved
 
-# Basic set-up = 
+  def initialize(multiplayer, last_played_at)
+    @id = Random.rand(1..1000)
+    @multiplayer = multiplayer
+    @last_played_at = last_played_at
+  end
 
-    def initialize(title, author)
-      @title = title
-      @author = author
-      @players = []
-    end
+  def can_be_archived?
+    super || @last_played_at < 2.years.ago
+  end
+end
 
-
-    def add_player(player)
-        @players << player
-        end

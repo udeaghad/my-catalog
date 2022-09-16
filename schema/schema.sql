@@ -17,7 +17,6 @@ CREATE TABLE Game(
   last_played_at DATE NOT NULL,
   item_id INT NOT NULL,
   CONSTRAINT item_fk FOREIGN KEY (item_id) REFERENCES Items (id) 
-);
 
 CREATE TABLE music_album(
   ID SERIAL PRIMARY KEY,
@@ -27,9 +26,32 @@ CREATE TABLE music_album(
   label_ID INT REFERENCES label(ID),
   author_ID INT REFERENCES author(ID),
   genre_ID INT REFERENCES genre(ID)
+
 );
 
 CREATE TABLE genre(
   ID SERIAL PRIMARY KEY,
   name VARCHAR(30)
 );
+
+CREATE TABLE Books(
+    "id" INT GENERATED ALWAYS AS IDENTITY,
+    "publisher" VARCHAR(255) NOT NULL,
+    "cover_state" VARCHAR(255) NOT NULL,
+    "publisher_date" DATE NOT NULL,
+    "archived" BOOLEAN NOT NULL,
+    "label_id" INTEGER NOT NULL
+);
+CREATE INDEX "books_label_id_index" ON
+    Books(label_id);
+ALTER TABLE Books 
+    ADD PRIMARY KEY(id);
+CREATE TABLE Label(
+    id INT GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR(255) NOT NULL,
+    color VARCHAR(255) NOT NULL
+);
+ALTER TABLE Label 
+  ADD PRIMARY KEY(id);
+ALTER TABLE Books
+  ADD CONSTRAINT "books_label_id_foreign" FOREIGN KEY(label_id) REFERENCES Label(id);
